@@ -1,0 +1,12 @@
+.logo-cross, .logo-life {
+    font-size: 26px;
+    text-transform: uppercase;
+}
+
+.logo-cross {
+    color: #FFFFFF;
+}
+
+.logo-life {
+    color: #6BE067;
+}

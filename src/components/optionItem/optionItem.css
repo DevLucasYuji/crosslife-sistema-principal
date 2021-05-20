@@ -1,0 +1,19 @@
+.option-item {
+    padding: 25px 0 0 25px;
+    display: flex;
+    cursor: pointer;
+    opacity: 0.9;
+    transform: 0.3s all;
+}
+
+.option-item:hover {
+    opacity: 1;
+}
+
+.option-title {
+    margin-left: 15px;
+}
+
+.option-active {
+    color: #6BE067;
+}
