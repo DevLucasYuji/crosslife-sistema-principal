@@ -1,5 +1,8 @@
-cosnt Student = () => {
+const Student = () => {
 
+    return (
+
+    )
 }
 
 export default Student

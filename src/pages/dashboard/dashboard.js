@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import Aside from '../../components/aside/aside'
 import Panel from '../panel/panel';
 import './dashboard.css'
+import Student from "../student/student";
 
 const Dashboard = () => {
     return (
