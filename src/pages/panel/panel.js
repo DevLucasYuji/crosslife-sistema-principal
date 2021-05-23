@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap'
 import './panel.css'
-import PanelImage from '../../../assets/img/panel.png'
+import PanelImage from '../../assets/img/panel.png'
 import { Link } from "react-router-dom";
 
 const Panel = () => {

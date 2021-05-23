@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 import Aside from '../../components/aside/aside'
-import Panel from './panel/panel';
+import Panel from '../panel/panel';
 import './dashboard.css'
 
 const Dashboard = () => {
@@ -10,7 +10,9 @@ const Dashboard = () => {
             <Aside/>
             <Container className="dashboard-container">
                 <Switch>
-                    <Route path="/alunos">teste aluno</Route>
+                    <Route path="/alunos">
+                        <Student/>
+                    </Route>
                     <Route path="/">
                         <Panel/>
                     </Route>
