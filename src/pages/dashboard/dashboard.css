@@ -1,3 +1,7 @@
 .dashboard {
     display: flex;
 }
+
+.dashboard-container {
+    width: 100%;
+}

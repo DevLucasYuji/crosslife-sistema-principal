@@ -1,6 +1,7 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from './pages/dashboard/dashboard'
 import Header from './components/header/header'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
@@ -10,7 +11,6 @@ function App() {
         <Route path="/">
           <Dashboard/>
         </Route>
-        <Route path="/alunos"></Route>
       </Switch>
     </Router>
   )

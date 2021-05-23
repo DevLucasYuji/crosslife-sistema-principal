@@ -1,11 +1,21 @@
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Container } from 'react-bootstrap';
 import Aside from '../../components/aside/aside'
+import Panel from './panel/panel';
 import './dashboard.css'
 
 const Dashboard = () => {
     return (
         <div className="dashboard">
             <Aside/>
-            <div>Teste</div>
+            <Container className="dashboard-container">
+                <Switch>
+                    <Route path="/alunos">teste aluno</Route>
+                    <Route path="/">
+                        <Panel/>
+                    </Route>
+                </Switch>
+            </Container>
         </div>
     )
 }

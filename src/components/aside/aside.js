@@ -7,10 +7,10 @@ import './aside.css'
 const Aside = () => {
     return (
         <>
-            <div className="container">
+            <div>
                 <ul className="container-aside">
-                    <OptionItem src={dashboardSvg} name="Dashboard"/>
-                    <OptionItem src={userSvg} name="Alunos"/>
+                    <OptionItem src={dashboardSvg} name="Dashboard" path="/"/>
+                    <OptionItem src={userSvg} name="Alunos" path="/alunos"/>
                 </ul>
             </div>
         </>
