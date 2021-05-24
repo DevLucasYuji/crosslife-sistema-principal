@@ -1,7 +1,26 @@
+.header-content {
+    position: relative;
+}
 .header {
     margin: 20px 0 15px 25px;
 }
 
 hr {
     margin: 0;
+}
+
+.logout {
+    position: absolute;
+    right: 0;
+    top: 0;
+    right: 100px;
+    display: block;
+    top: 10px;
+    text-transform: uppercase;
+    color: #FFF;
+    transition: 0.3s all;
+}
+
+.logout:hover {
+    color: #FFF;
 }

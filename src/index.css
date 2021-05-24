@@ -24,6 +24,31 @@ code {
     monospace;
 }
 
-* {
-  color: #FFF!important;
+span, div, label {
+  color: #FFF;
+}
+
+.modal-content {
+  background-color: #212529!important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ebe5e5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6BE067!important;
+  border-radius: 16px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #6BE067!important;
 }

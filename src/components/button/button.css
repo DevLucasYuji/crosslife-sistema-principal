@@ -1,0 +1,15 @@
+button.primary {
+    background: transparent;
+    border-radius: 5px;
+    border: 2px solid #FFF;
+    text-transform: uppercase;
+    color: #FFF;
+    width: 100%;
+    font-size: 18px;
+    padding: 10px 0;
+    transition: 0.3s all;
+}
+
+button.primary:hover {
+    transform: scale(1.025);
+}

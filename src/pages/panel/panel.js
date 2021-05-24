@@ -11,7 +11,7 @@ const Panel = () => {
                 <img className="panel-image" src={PanelImage} />
             </Col>
             <div className="panel-items d-flex justify-content-between">
-                <PanelItem title="Alunos" description="Gerencie seus alunos" path="/alunos"/>
+                <PanelItem title="Alunos" description="Gerencie seus alunos" path="dashboard/alunos"/>
                 <PanelItem title="Matriculas" description="Gerencie suas matriculas"/>
                 <PanelItem title="Despesas" description="Gerencie suas despesas"/>
                 <PanelItem title="Estoque" description="Gerencie seus estoques"/>

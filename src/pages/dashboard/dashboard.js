@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 import Aside from '../../components/aside/aside'
 import Panel from '../panel/panel';
@@ -11,10 +11,10 @@ const Dashboard = () => {
             <Aside/>
             <Container className="dashboard-container">
                 <Switch>
-                    <Route path="/alunos">
+                    <Route path="/dashboard/alunos">
                         <Student/>
                     </Route>
-                    <Route path="/">
+                    <Route path="/dashboard">
                         <Panel/>
                     </Route>
                 </Switch>

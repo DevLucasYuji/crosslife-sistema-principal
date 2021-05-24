@@ -1,0 +1,15 @@
+.login {
+    width: 480px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #191C20;
+    padding: 0 64px 64px;
+    border-radius: 10px;
+}
+
+.logo {
+    margin: 64px auto 40px;
+    text-align: center;
+}

@@ -9,8 +9,8 @@ const Aside = () => {
         <>
             <div>
                 <ul className="container-aside">
-                    <OptionItem src={dashboardSvg} name="Dashboard" path="/"/>
-                    <OptionItem src={userSvg} name="Alunos" path="/alunos"/>
+                    <OptionItem src={dashboardSvg} name="Dashboard" path="/dashboard"/>
+                    <OptionItem src={userSvg} name="Alunos" path="/dashboard/alunos"/>
                 </ul>
             </div>
         </>
