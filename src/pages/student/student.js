@@ -57,7 +57,10 @@ const Student = () => {
                     key={index} 
                     popup={activeKeyPopup === index} 
                     handlePopup={() => setActiveKeyPopup(activeKeyPopup !== index ? index : null)}
-                    removeItem={() => removeStudent(item.id)}
+                    removeItem={() => {
+                        setActiveKeyPopup(null)
+                        removeStudent(item.id)
+                    }}
                     showEditModal={() => { 
                         setActiveKeyPopup(null)
                         setEditModal(item) 

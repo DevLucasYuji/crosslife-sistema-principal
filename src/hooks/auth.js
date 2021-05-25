@@ -5,18 +5,19 @@ const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
     const [data, setData] = useState(() => {
-        const token = localStorage["token"]
+        const token = localStorage.getItem("token")
+        console.log(token)
         if (token) {
             api.defaults.headers.authorization = `Bearer ${token}`
-            return
+            return token
         }
 
         return {}
     })
     const signIn = async (username, password) => {
         const response = await api.post("/login", {"user_name": username, password})
-        localStorage["token"] = response.data.Token
-        api.defaults.headers.authorization = `Bearer ${response.data.token}`
+        localStorage.setItem("token", response.data.Token)
+        api.defaults.headers.authorization = `Bearer ${response.data.Token}`
         setData(response.data.Token)
     }
 
