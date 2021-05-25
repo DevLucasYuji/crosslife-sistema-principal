@@ -4,6 +4,8 @@ import { Modal } from 'react-bootstrap'
 import Button from '../../components/button/button'
 import Input from '../../components/input/input'
 import MoreSvg from './../../assets/img/more.svg'
+import { useEffect } from 'react'
+import api from '../../services/api'
 
 const Student = () => {
 
@@ -13,20 +15,33 @@ const Student = () => {
 
     const [activeKeyPopup, setActiveKeyPopup] = useState(null)
 
+    const [students, setStudents] = useState([])
+
+    useEffect(() => {
+        api.get("/alunos").then((resp) => setStudents(resp.data))        
+    }, [])
+
     const handleShow = () => {
         setShowModal(true)
     }
 
+    const removeStudent = async (id) => {
+        await api.delete(`/aluno/${id}`)
+        setStudents(students.filter((std) => std.id != id))
+    }
+
+    const handleStudent = (student) => { setStudents([...students, student]) }
+
     return (
         <div className="student">
-            { showModal && <StudentModal buttonName="criar usuário" setModal={setShowModal}/>}
-            { editModal && <StudentModal buttonName="editar usuário" modal={editModal} setModal={setEditModal}/>}
+            { showModal && <StudentModal handleStudent={handleStudent} typeModal="add" buttonName="criar usuário" setModal={setShowModal}/>}
+            { editModal && <StudentModal userId={editModal.id} typeModal="edit" buttonName="editar usuário" modal={editModal} setModal={setEditModal}/>}
             <div>
                 <Button className="student-add" type="primary" name="criar" onClick={handleShow}/>
                 <h2 className="student-title">Alunos</h2>
             </div>
             
-            <input className="input-search" type="text" id="" placeholder="Pesquisar"/>
+            <input className="input-search" type="text" placeholder="Pesquisar"/>
             <ul className="student-header">
                 <li>Id</li>
                 <li>Nome</li>
@@ -37,29 +52,12 @@ const Student = () => {
                 <li>Opções</li>
             </ul>
             <div className="student-list">
-                {
-                [
-                    {
-                        id: 1,
-                        nome: "Lucas Yuji",
-                        idade: 21,
-                        cpf: "237.563.888-32",
-                        telefone: "(11) 93085-5961",
-                        email: "lucas@hotmail.com"
-                    },
-                    {
-                        id: 1,
-                        nome: "Lucas Yuji",
-                        idade: 21,
-                        cpf: "237.563.888-32",
-                        telefone: "(11) 93085-5961",
-                        email: "lucas@hotmail.com"
-                    },
-                ].map((item, index) => {
+                { students && students.map((item, index) => {
                     return <StudentItem 
                     key={index} 
                     popup={activeKeyPopup === index} 
                     handlePopup={() => setActiveKeyPopup(activeKeyPopup !== index ? index : null)}
+                    removeItem={() => removeStudent(item.id)}
                     showEditModal={() => { 
                         setActiveKeyPopup(null)
                         setEditModal(item) 
@@ -75,22 +73,69 @@ const StudentModal = (props) => {
     
     const handleClose = () => props.setModal(false)
 
+    const [nome, setNome] = useState(props.modal?.nome || "")
+    const [idade, setIdade] = useState(props.modal?.idade || "")
+    const [cpf, setCpf] = useState(props.modal?.cpf || "")
+    const [telefone, setTelefone] = useState(props.modal?.telefone || "")
+    const [email, setEmail] = useState(props.modal?.email || "")
+
+    const alunoDTO = { 
+        nome, 
+        idade, 
+        cpf, 
+        telefone, 
+        email 
+    }
+
+    const editaAluno = async () => {
+        const aluno = await api.put(`/aluno/${props.userId}`, alunoDTO)
+        if (aluno.data) {
+            window.location.reload()
+            handleClose()
+        }
+    }
+
+    const addAluno = async () => {
+        const aluno = await api.post("/aluno", alunoDTO)    
+        if (aluno.data) {
+            props.handleStudent(aluno.data)   
+            handleClose()
+        }
+    }
+
+    const handleModal = async (e) => {
+        e.preventDefault()
+        const typeModal = props.typeModal
+        switch(typeModal) {
+            case "edit":
+                editaAluno()
+                break;
+            case "add":
+                addAluno()
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
         <Modal show={true} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{props.buttonName.toUpperCase()}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <Input className="modal-input" type="text" label="nome" value={props.modal.nome}/>
-            <Input className="modal-input" type="text" label="idade" value={props.modal.idade}/>
-            <Input className="modal-input" type="text" label="cpf" value={props.modal.cpf}/>
-            <Input className="modal-input" type="text" label="telefone" value={props.modal.telefone}/>
-            <Input className="modal-input" type="text" label="email" value={props.modal.email}/>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button name={props.buttonName}/>
-        </Modal.Footer>
-      </Modal>
+            <form onSubmit={handleModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{props.buttonName.toUpperCase()}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Input className="modal-input" type="text" label="nome" onChange={({target}) => setNome(target.value)} value={nome}/>
+                    <Input className="modal-input" type="text" label="idade" onChange={({target}) => setIdade(target.value)} value={idade}/>
+                    <Input className="modal-input" type="text" label="cpf" onChange={({target}) => setCpf(target.value)} value={cpf}/>
+                    <Input className="modal-input" type="text" label="telefone" onChange={({target}) => setTelefone(target.value)} value={telefone}/>
+                    <Input className="modal-input" type="text" label="email" onChange={({target}) => setEmail(target.value)} value={email}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button name={props.buttonName}/>
+                </Modal.Footer>
+            </form>
+        </Modal>
     )
 }
 
@@ -99,7 +144,7 @@ const StudentItem = (props) => {
     const popup = () => {
         return (
             <Popup id={props.id} name={props.nome}>
-                <PopItem name="Remover"/>
+                <PopItem onClick={props.removeItem} name="Remover"/>
                 <PopItem onClick={props.showEditModal} name="Editar"/>
             </Popup>
         )
