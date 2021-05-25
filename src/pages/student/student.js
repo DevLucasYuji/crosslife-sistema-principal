@@ -13,6 +13,8 @@ const Student = () => {
 
     const [editModal, setEditModal] = useState(null)
 
+    const [pesquisar, setPesquisar] = useState(null)
+
     const [activeKeyPopup, setActiveKeyPopup] = useState(null)
 
     const [students, setStudents] = useState([])
@@ -41,7 +43,7 @@ const Student = () => {
                 <h2 className="student-title">Alunos</h2>
             </div>
             
-            <input className="input-search" type="text" placeholder="Pesquisar"/>
+            <input className="input-search" type="text" placeholder="Pesquisar" onChange={({target}) => setPesquisar(target.value)}/>
             <ul className="student-header">
                 <li>Id</li>
                 <li>Nome</li>
@@ -52,7 +54,12 @@ const Student = () => {
                 <li>Opções</li>
             </ul>
             <div className="student-list">
-                { students && students.map((item, index) => {
+                { 
+                    students && students.filter((std) => {
+                        if(!pesquisar) return true
+                        const pesq = new RegExp(`${pesquisar}.{0,}`)
+                        return pesq.test(std.nome)
+                    }).map((item, index) => {
                     return <StudentItem 
                     key={index} 
                     popup={activeKeyPopup === index} 
