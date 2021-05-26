@@ -8,6 +8,10 @@ Sistema principal para fazer o gerenciamento da academia crosslife de suzano. On
 - Boostrap
 - React-Boostrap
 
+### Pré-requisito
+- Node
+- Npm
+
 ## Preparando o ambiente
 ```javascript
 npm install
