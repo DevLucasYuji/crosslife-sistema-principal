@@ -57,8 +57,8 @@ const Student = () => {
                 { 
                     students && students.filter((std) => {
                         if(!pesquisar) return true
-                        const pesq = new RegExp(`${pesquisar}.{0,}`)
-                        return pesq.test(std.nome)
+                        const pesq = new RegExp(`${pesquisar.toUpperCase()}.{0,}`)
+                        return pesq.test(std.nome.toUpperCase())
                     }).map((item, index) => {
                     return <StudentItem 
                     key={index} 
